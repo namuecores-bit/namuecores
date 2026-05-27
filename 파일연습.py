@@ -10,5 +10,3 @@ f = open("test.txt", "rt", encoding="utf-8")  # 읽기 모드로 파일 열기
 content = f.read()  # 파일 전체 내용 읽기
 print(content)  # 읽은 내용 출력
 f.close()  # 파일 닫기
-
-
