@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HTML5 · CSS3 · JavaScript 학습용 예제</title>
+  <meta name="description" content="간단한 실습용 한파일 웹페이지: HTML5 시맨틱, CSS3 예제, JavaScript 인터랙션">
+  <style>
+    /* 기본 레이아웃 */
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --accent:#2b8cff;
+      --text:#222;
+    }
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans KR',"Helvetica Neue",Arial; margin:0; background:var(--bg); color:var(--text); line-height:1.45}
+    header{background:linear-gradient(90deg,var(--accent),#6fb8ff); color:white; padding:24px}
+    .container{max-width:1000px;margin:20px auto;padding:16px}
+    nav{display:flex;gap:8px;flex-wrap:wrap}
+    nav a{color:white;text-decoration:none;padding:8px 12px;background:rgba(255,255,255,0.12);border-radius:6px}
+
+    /* 카드 스타일 */
+    .card{background:var(--card);border-radius:8px;padding:16px;margin:12px 0;box-shadow:0 6px 18px rgba(20,30,50,0.06)}
+    h1,h2{margin:0 0 12px}
+
+    /* 그리드 레이아웃: 반응형 */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+
+    /* 버튼 */
+    .btn{background:var(--accent);color:white;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
+    .btn.secondary{background:#eee;color:var(--text)}
+
+    /* 폼 */
+    input,textarea{width:100%;padding:8px;border-radius:6px;border:1px solid #dfe6ef}
+
+    /* 간단한 전환 효과 */
+    .theme-dark{--bg:#0f1724;--card:#0b1220;--accent:#10b981;--text:#e6eef6}
+
+    /* 예제: CSS Grid와 Flex 섹션 */
+    .flex-row{display:flex;gap:8px;align-items:center}
+    .box{background:linear-gradient(180deg,#fff,#f3f6fb);padding:12px;border-radius:8px;border:1px solid #eef3fb}
+
+    footer{font-size:13px;text-align:center;color:#6c7a89;padding:20px}
+
+    @media (max-width:420px){header{padding:16px} .container{padding:8px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>HTML5 · CSS3 · JavaScript 학습용 예제</h1>
+      <nav>
+        <a href="#html">HTML5</a>
+        <a href="#css">CSS3</a>
+        <a href="#js">JavaScript</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="html" class="card">
+      <h2>HTML5 (시맨틱 요소)</h2>
+      <p>다음은 주요 시맨틱 태그의 간단한 예시입니다.</p>
+      <div class="grid">
+        <article class="box">
+          <h3>article</h3>
+          <p>독립적인 콘텐츠 블록을 표현합니다. 블로그 글, 뉴스 등에 적합합니다.</p>
+        </article>
+        <aside class="box">
+          <h3>aside</h3>
+          <p>문맥상 보조적인 정보에 사용합니다. 사이드바나 관련 링크.</p>
+        </aside>
+        <section class="box">
+          <h3>section</h3>
+          <p>문서의 의미적 구획을 나타냅니다. 제목을 가질 수 있습니다.</p>
+        </section>
+        <nav class="box">
+          <h3>nav</h3>
+          <p>내비게이션 링크 모음에 사용합니다.</p>
+        </nav>
+      </div>
+
+      <h3>폼 예제</h3>
+      <form id="sampleForm" class="grid" onsubmit="return false;">
+        <label>
+          이름
+          <input id="nameInput" placeholder="이름을 입력하세요">
+        </label>
+        <label>
+          메모
+          <textarea id="noteInput" rows="3" placeholder="간단한 메모"></textarea>
+        </label>
+        <div class="flex-row">
+          <button class="btn" onclick="submitSample()">전송</button>
+          <button class="btn secondary" onclick="resetSample()">초기화</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="css" class="card">
+      <h2>CSS3 (레이아웃 · 효과)</h2>
+      <p>아래 예시는 Flexbox, Grid, 변수, 미디어쿼리, 전환을 보여줍니다.</p>
+      <div class="grid">
+        <div class="box">
+          <h4>Flexbox</h4>
+          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+            <div style="flex:1;background:#fff;padding:8px;border-radius:6px;text-align:center">A</div>
+            <div style="flex:2;background:#fff;padding:8px;border-radius:6px;text-align:center">B (flex:2)</div>
+            <div style="flex:1;background:#fff;padding:8px;border-radius:6px;text-align:center">C</div>
+          </div>
+        </div>
+        <div class="box">
+          <h4>Grid</h4>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+          </div>
+        </div>
+      </div>
+
+      <h4>CSS 변수와 전환</h4>
+      <div class="flex-row" style="gap:12px;margin-top:8px">
+        <button class="btn" onclick="toggleTheme()">다크 토글</button>
+        <div style="padding:12px;border-radius:8px;background:linear-gradient(180deg,#fff,#eef6ff);transition:transform .2s" id="animBox">호버 또는 버튼으로 체험</div>
+      </div>
+    </section>
+
+    <section id="js" class="card">
+      <h2>JavaScript (DOM, 이벤트, fetch 예제)</h2>
+      <p>간단한 인터랙션과 설명입니다.</p>
+
+      <h3>DOM 조작 & 이벤트</h3>
+      <div class="box">
+        <p>아래 입력 상자에 이름을 넣고 <strong>환영</strong> 버튼을 누르면 메시지가 업데이트됩니다.</p>
+        <div class="flex-row" style="gap:8px;">
+          <input id="greetName" placeholder="이름 입력">
+          <button class="btn" onclick="greet()">환영</button>
+        </div>
+        <p id="greetMsg" style="margin-top:8px;font-weight:600"></p>
+      </div>
+
+      <h3>작은 Todo 예제</h3>
+      <div class="box">
+        <div class="flex-row" style="gap:8px">
+          <input id="todoInput" placeholder="할 일을 입력">
+          <button class="btn" onclick="addTodo()">추가</button>
+        </div>
+        <ul id="todoList" style="margin-top:12px;padding-left:18px"></ul>
+      </div>
+
+      <h3>fetch 사용법 (예시, CORS로 인해 실제 호출은 제약이 있을 수 있음)</h3>
+      <div class="box">
+        <button class="btn" onclick="loadExample()">데모 데이터 불러오기</button>
+        <pre id="fetchResult" style="white-space:pre-wrap;margin-top:8px;background:#f8fafc;padding:8px;border-radius:6px;max-height:160px;overflow:auto"></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 예제 페이지 — HTML5 · CSS3 · JavaScript 기본 연습
+  </footer>
+
+  <script>
+    // 간단한 폼 전송 시뮬레이션
+    function submitSample(){
+      const name = document.getElementById('nameInput').value.trim();
+      const note = document.getElementById('noteInput').value.trim();
+      alert('전송된 데이터:\n이름: ' + (name||'없음') + '\n메모: ' + (note||'없음'));
+    }
+    function resetSample(){
+      document.getElementById('sampleForm').reset();
+    }
+
+    // 테마 토글 (CSS 변수 변경)
+    function toggleTheme(){
+      document.documentElement.classList.toggle('theme-dark');
+    }
+
+    // 환영 메시지
+    function greet(){
+      const n = document.getElementById('greetName').value.trim();
+      const msg = n ? `환영합니다, ${n}님!` : '이름을 입력해 주세요.';
+      document.getElementById('greetMsg').textContent = msg;
+    }
+
+    // 간단한 Todo 리스트: 추가 및 삭제
+    function addTodo(){
+      const input = document.getElementById('todoInput');
+      const text = input.value.trim();
+      if(!text) return;
+      const li = document.createElement('li');
+      li.textContent = text + ' ';
+      const rem = document.createElement('button');
+      rem.textContent = '삭제';
+      rem.className = 'btn secondary';
+      rem.style.padding='4px 8px';
+      rem.style.marginLeft='8px';
+      rem.onclick = ()=> li.remove();
+      li.appendChild(rem);
+      document.getElementById('todoList').appendChild(li);
+      input.value='';
+    }
+
+    // fetch 예제 (공개 API 예시)
+    async function loadExample(){
+      const out = document.getElementById('fetchResult');
+      out.textContent = '로딩 중...';
+      try{
+        const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+        if(!res.ok) throw new Error(res.status);
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      }catch(e){
+        out.textContent = '에러: ' + e.message + '\n(로컬 파일에서는 CORS 또는 네트워크 제약이 있을 수 있습니다)';
+      }
+    }
+
+    // 페이지가 준비된 후 간단한 초기화
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // 예시: animBox에 hover 효과 추가 (CSS 트랜지션과 결합)
+      const box = document.getElementById('animBox');
+      box.addEventListener('mouseenter', ()=> box.style.transform='translateY(-6px)');
+      box.addEventListener('mouseleave', ()=> box.style.transform='translateY(0)');
+    });
+  </script>
+</body>
+</html>
