@@ -2,10 +2,8 @@
 
 # 크롤링을 위한 선언
 from bs4 import BeautifulSoup
-
 # 웹 서버에 요청
 import urllib.request
-
 # 정규표현식
 import re
 
